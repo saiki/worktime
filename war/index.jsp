@@ -34,23 +34,23 @@ $(function() {
 		$(this).removeClass("active");
     });
 });
+
 function save(button) {
 	var row = $(button).parent().parent();
-	
     $.ajax({
         dataType: "json",
         type: "POST",
         data: {
-            "key" : $(row).filter(,
-            "date": date,
-            "from": from,
-            "to" : to,
-            "code": code,
-            "work": work,
-            "remark": remark
+            "key" : $(row).find("td.control > input.key").val(),
+            "date": $(row).find("td.date > input.date").val(),
+            "from": $(row).find("td.from > input.from").val(),
+            "to" : $(row).find("td.to > input.to").val(),
+            "code": $(row).find("td.code > input.code").val(),
+            "work": $(row).find("td.work > input.work").val(),
+            "remark": $(row).find("td.remark > input.remark").val()
         },
         cache: false,
-        url: "/worktime/save/",
+        url: "/worktime/save",
         success: function(data, status, request) {
             
         },
@@ -100,32 +100,26 @@ function save(button) {
 <c:forEach var="v" items="${list}">
 		<tr class="detail">
 	        <td class="date">
-	            <span><fmt:formatDate value="${v.date}" pattern="yyyy/MM/dd"/></span>
-	            <input type="text" class="date_chooser" name="date[]"/>
+	            <input type="text" class="date_chooser" name="date[]" value="<fmt:formatDate value="${v.date}" pattern="yyyy/MM/dd"/>"/>
 	        </td>
 	        <td class="from">
-	            <span><fmt:formatDate value="${v.from}" pattern="HH:mm"/></span>
-	            <input type="text" class="from" name="from[]"/>
+	            <input type="text" class="from" name="from[]" value="<fmt:formatDate value="${v.from}" pattern="HH:mm"/>"/>
 	        </td>
 	        <td class="to">
-	            <span><fmt:formatDate value="${v.to}" pattern="HH:mm"/></span>
-	            <input type="text" class="to" name="to[]"/>
+	            <input type="text" class="to" name="to[]" value="<fmt:formatDate value="${v.to}" pattern="HH:mm"/>"/>
 	        </td>
 	        <td class="code">
-	            <span>${f:h(v.code)}</span>
-	            <input type="text" class="code" name="code[]"/>
+	            <input type="text" class="code" name="code[]" value="${f:h(v.code)}"/>
 	        </td>
 	        <td class="work">
-	            <span>${f:h(v.work)}</span>
-	            <input type="text" class="work" name="work[]"/>
+	            <input type="text" class="work" name="work[]" value="${f:h(v.work)}"/>
 	        </td>
 	        <td class="remark">
-	            <span>${f:h(v.remark)}</span>
-	            <input type="text" class="remark" name="remark[]"/>
+	            <input type="text" class="remark" name="remark[]" value="${f:h(v.remark)}"/>
 	        </td>
 	        <td class="control">
-	        	<input type="hidden" name="key[]" value="${f:h(key)}}"/>
-	            <span><a href="${f:url("/worktime/delete?key="+v.key)}">削除</a></span>
+	        	<input type="hidden" class="key" name="key[]" value="${f:h(v.key)}}"/>
+	            <span class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"><a href="/worktime/delete?key=${f:url(f:h(v.key))}">削除</a></span>
 	        </td>
 		</tr>
 </c:forEach>
@@ -149,7 +143,7 @@ function save(button) {
 	            <input type="text" class="remark" name="remark[]"/>
 	        </td>
 	        <td class="control">
-	        	<input type="button" onclick="save(this); return false;" value="登録">
+	        	<input type="button" onclick="save(this); return false;" value="登録"  class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
 	        </td>
 		</tr>
 	</table>

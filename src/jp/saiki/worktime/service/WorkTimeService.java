@@ -1,5 +1,7 @@
 package jp.saiki.worktime.service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -21,9 +23,15 @@ public class WorkTimeService {
      * 登録
      * @param input
      * @return
+     * @throws ParseException 
      */
-    public WorkTime save(Map<String, Object> input) {
+    public WorkTime save(Map<String, Object> input) throws ParseException {
     	WorkTime wt = new WorkTime();
+    	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+    	SimpleDateFormat fromToFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm");
+        input.put("from", fromToFormat.parse(input.get("date").toString() + " " + input.get("from").toString()));
+        input.put("to", fromToFormat.parse(input.get("date").toString() + " " + input.get("to").toString()));
+    	input.put("date", dateFormat.parse(input.get("date").toString()));
     	BeanUtil.copy(input, wt);
     	Transaction tx = Datastore.beginTransaction();
     	Datastore.put(wt);
