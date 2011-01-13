@@ -16,10 +16,12 @@ public class IndexController extends Controller {
 
     @Override
     public Navigation run() throws Exception {
+        // 初期検索条件
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
         Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DAY_OF_YEAR, -7);
         requestScope("from", sdf.format(cal.getTime()));
-        cal.add(Calendar.DAY_OF_YEAR, 7);
+        cal.add(Calendar.DAY_OF_YEAR, 14);
         requestScope("to", sdf.format(cal.getTime()));
         
         Date from = sdf.parse(requestScope("from").toString());
