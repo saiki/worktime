@@ -3,7 +3,9 @@ package jp.saiki.worktime.controller;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
+import jp.saiki.worktime.model.WorkTime;
 import jp.saiki.worktime.service.WorkTimeService;
 
 import org.slim3.controller.Controller;
@@ -26,7 +28,10 @@ public class IndexController extends Controller {
         
         Date from = sdf.parse(requestScope("from").toString());
         Date to = sdf.parse(requestScope("to").toString());
-        requestScope("list", service.search(from, to));
+        List<WorkTime> list = service.search(from, to);
+        // 新規登録ようにからのデータを追加
+        list.add(new WorkTime());
+        requestScope("list", list);
         return forward("index.jsp");
     }
     
