@@ -6,21 +6,39 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="stylesheet" href="/stylesheets/theme/jquery-ui-1.8.7.css">
-<link rel="stylesheet" href="/stylesheets/worktime.css">
-<script src="/javascripts/jquery-1.4.4.min.js"></script>
-<script src="/javascripts/jquery-ui-1.8.7.custom.min.js"></script>
-<script src="/javascripts/jquery-ui-i18n.js"></script>
-<script src="/javascripts/worktime.js"></script>
-<title>作業時間記録</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" href="/stylesheets/theme/jquery-ui-1.8.7.css"/>
+  <link rel="stylesheet" href="/stylesheets/worktime.css"/>
+  <script src="/javascripts/jquery-1.4.4.min.js"></script>
+  <script src="/javascripts/jquery-ui-1.8.7.custom.min.js"></script>
+  <script src="/javascripts/jquery-ui-i18n.js"></script>
+  <script src="/javascripts/worktime.js"></script>
+  <title>作業時間記録</title>
 </head>
 <body>
-<script>
+  <script>
 $(function() {
 	$(".date_chooser").datepicker();
 	$("#search_button").click(function() {
-		
+		$.ajax({
+			dataType: "json",
+            type: "POST",
+            data: {
+                    from: $(".search input[name=from]").val(),
+                    to: $(".search input[name=to]").val(),
+            },
+            cache: false,
+            url: "/worktime/json",
+            success: function(data, status, request) {
+                console.log(data);
+                console.log(status);
+            },
+            error: function(request, status, thrown) {
+                console.log(request);
+                console.log(status);
+                console.log(thrown);
+            }
+		});
 	});
     $(".list table tr.detail").focus(function() {
 		$(this).addClass("active");
@@ -34,12 +52,12 @@ $(function() {
     });
 });
 
+  </script>
 
-</script>
-
-<c:if test="${!(empty f:errors()) && fn:length(f:errors()) > 0}">
-<div class="ui-widget">
-	<div class="ui-state-error ui-corner-all">
+  <div id="message">
+	<c:if test="${!(empty f:errors()) && fn:length(f:errors()) > 0}">
+	<div class="ui-widget">
+	  <div class="ui-state-error ui-corner-all">
 		<p>
 			<span class="ui-icon ui-icon-alert" style="float: left; margin-right: 0.3em;"></span>
 			<strong>${fn:length(f:errors())}件のエラーがあります</strong><br>
@@ -49,9 +67,10 @@ $(function() {
 				<li>${f:h(e)}</li>
 			</c:forEach>
 		</ul>
+	  </div>
 	</div>
-</div>
-</c:if>
+	</c:if>
+  </div>
 
 <div id="contents">
 <div class="ui-widget ui-corner-all search">
@@ -75,7 +94,7 @@ $(function() {
 <c:forEach var="v" items="${list}">
 		<tr class="detail">
 	        <td class="date">
-	            <input type="text" class="date_chooser" name="date[]" value="<fmt:formatDate value="${v.date}" pattern="yyyy/MM/dd"/>"/>
+	            <input type="text" class="date_chooser date" name="date[]" value="<fmt:formatDate value="${v.date}" pattern="yyyy/MM/dd"/>"/>
 	        </td>
 	        <td class="from">
 	            <input type="text" class="from" name="from[]" value="<fmt:formatDate value="${v.from}" pattern="HH:mm"/>"/>
@@ -94,8 +113,8 @@ $(function() {
 	        </td>
 	        <td class="control">
 				<c:if test="${!(empty v.key)}">
-		    	<input type="hidden" class="key" name="key[]" value="${f:h(v.key)}}"/>
-	            <input type="button" onclick="delete(this); return false;" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" value="削除"/>
+		    	<input type="hidden" class="key" name="key[]" value="${f:h(v.key)}"/>
+	            <input type="button" onclick="del(this); return false;" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" value="削除"/>
 	            <input type="button" onclick="save(this); return false;" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" value="更新"/>
 				</c:if>
 				<c:if test="${empty v.key}">

@@ -35,14 +35,14 @@ function save(button) {
     });
 }
 
-function delete(button) {
+function del(button) {
 	var td = $(button).parent();
 	$.ajax({
 		dataType: "json",
 		type: "POST",
 		data: {
 			"key": $(td).find("input.key").val()
-		}
+		},
 		cache: false,
 		url: "/worktime/delte",
 		success: function(data, status, request) {
