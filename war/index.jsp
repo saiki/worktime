@@ -20,6 +20,13 @@
 $(function() {
 	$(".date_chooser").datepicker();
 	$("#search_button").click(function() {
+        var dialog = $("<div>検索中...</div>").dialog({
+            modal: true,
+            draggable: false,
+            resizable: false,
+            title: "Information",
+            closeOnEscape: false
+        });
 		$.ajax({
 			dataType: "json",
             type: "POST",
@@ -30,13 +37,101 @@ $(function() {
             cache: false,
             url: "/worktime/json",
             success: function(data, status, request) {
-                console.log(data);
-                console.log(status);
+                function pad(value) {
+                    return (value.toString().length < 2) ? '0' + value : value;
+                }
+                function createCell(value) {
+                    var date_cell = $("<td></td>");
+                }
+                function createInput(type, clazz) {
+                    var input = $("<input></input>");
+                    input.attr("type", type);
+                    input.addClass(clazz);
+                    return input;
+                }
+                $(".list > table tr.detail").empty().remove();
+                for (i = 0; i < data.length; i++) {
+                    v = data[i];
+                    var row = $("<tr></tr>");
+                    row.addClass("detail");
+                    // 日付
+                    var date_input = createInput("text", "date_chooser date");
+                    if (v.date != undefined) {
+                        var dt = new Date(v.date);
+                        date_input.attr("value", dt.getUTCFullYear() + "/" + pad(dt.getUTCMonth() + 1) + "/" + pad(dt.getUTCDate()));
+                    }
+                    row.append($("<td></td>").addClass("date").append(date_input));
+                    // 開始
+                    var from_input = createInput("text", "from");
+                    if (v.from != undefined) {
+                        var dt = new Date(v.from);
+                        from_input.attr("value", pad(dt.getUTCHours()) + ":" + pad(dt.getUTCMinutes()));
+                    }
+                    row.append($("<td></td>").addClass("from").append(from_input));
+                    // 終了
+                    var to_input = createInput("text", "to");
+                    if (v.to != undefined) {
+                        var dt = new Date(v.to);
+                        to_input.attr("value", pad(dt.getUTCHours()) + ":" + pad(dt.getUTCMinutes()));
+                    }
+                    row.append($("<td></td>").addClass("to").append(to_input));
+                    // コード
+                    var code_input = createInput("text", "code");
+                    if (v.code != undefined) {
+                        code_input.attr("value", $("<div>").html(v.code).html());
+                    }
+                    row.append($("<td></td>").addClass("code").append(code_input));
+                    // コード
+                    var work_input = createInput("text", "work");
+                    if (v.work != undefined) {
+                        work_input.attr("value", $("<div>").html(v.work).html());
+                    }
+                    row.append($("<td></td>").addClass("work").append(work_input));
+                    // 備考
+                    var remark_input = createInput("text", "remark");
+                    if (v.remark != undefined) {
+                        remark_input.attr("value", $("<div>").html(v.remark).html());
+                    }
+                    row.append($("<td></td>").addClass("remark").append(remark_input));
+                    // 操作
+                    var control_cell = $("<td></td>");
+                    control_cell.addClass("control");
+                    if (v.key != undefined) {
+                        // key
+                        var key_input = createInput("hidden", "control");
+                        key_input.attr("value", $("<div>").html(v.key).html());
+                        control_cell.append(key_input);
+                        // 削除ボタン
+                        var delete_button = createInput("button", "ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only");
+                        delete_button.attr("value", "削除");
+                        delete_button.attr("onclick", "del(this); return false;");
+                        control_cell.append(delete_button);
+                        // 更新ボタン
+                        var update_button = createInput("button", "ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only");
+                        update_button.attr("value", "更新");
+                        update_button.attr("onclick", "save(this); return false;");
+                        control_cell.append(update_button);
+                    } else {
+                        // 更新ボタン
+                        var insert_button = createInput("button", "ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only");
+                        insert_button.attr("type", "button");
+                        insert_button.attr("value", "登録");
+                        insert_button.attr("class", "ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only");
+                        insert_button.attr("onclick", "save(this); return false;");
+                        control_cell.append(insert_button);
+                    }
+                    row.append(control_cell);
+
+                    $(".list > table").append(row);
+                }
             },
             error: function(request, status, thrown) {
                 console.log(request);
                 console.log(status);
                 console.log(thrown);
+            },
+            complete: function(request, status) {
+                dialog.dialog("close");
             }
 		});
 	});
