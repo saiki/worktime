@@ -15,7 +15,6 @@
 var dialog = null;
 $(function() {
 
-	$(".date_chooser").datepicker();
 	$("#search_button").click(function() {
 	    if (dialog == null) {
 	        var loading = $("<div>検索中...</div>").dialog({
@@ -123,6 +122,7 @@ $(function() {
 
                     $(".list > table").append(row);
                 }
+                $(".date_chooser").datepicker();
             },
             error: function(request, status) {
                 console.log(request);
@@ -155,11 +155,11 @@ $(function() {
     });
 
     $.getJSON("/worktime/", {}, function(data, status, xhr) {
-        dialog.dialog("close");
         $(".search input[name=from]").val(data.from);
         $(".search input[name=to]").val(data.to);
         $("#search_button").click();
     });
+    $(".date_chooser").datepicker();
 });
 
   </script>
