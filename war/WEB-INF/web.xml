@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <web-app xmlns="http://java.sun.com/xml/ns/javaee" version="2.5">
+
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
+    
 	<context-param>
         <param-name>slim3.rootPackage</param-name>
         <param-value>jp.saiki.worktime</param-value>
@@ -82,11 +87,14 @@
         <url-pattern>/ktrwjr/ktrwjr/ktrwjr.s3gwt</url-pattern>
     </servlet-mapping>
     
-    <security-constanint>
-    	<web-resource-collection>
-    		<url-pattern>/*</url-pattern>
-    	</web-resource-collection>
-    </security-constanint>
+    <security-constraint>
+        <web-resource-collection>
+            <url-pattern>/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>*</role-name>
+        </auth-constraint>
+    </security-constraint>
     <security-constraint>
         <web-resource-collection>
             <url-pattern>*.jsp</url-pattern>

@@ -24,6 +24,11 @@ public class JsonController extends Controller {
 
     @Override
     public Navigation run() throws Exception {
+        String encoding = request.getCharacterEncoding();
+        if (encoding == null) {
+            encoding = "UTF-8";
+        }
+        response.setContentType("application/json; charset=" + encoding);
         if (asKey("key") != null ) {
             // 単一オブジェクトの取得
             WorkTime wt = Datastore.get(WorkTime.class, asKey("key"));
@@ -32,6 +37,10 @@ public class JsonController extends Controller {
             json.put("key", KeyFactory.keyToString(wt.getKey()));
             requestScope("json", json);
         } else {
+            if (!validate()) {
+                requestScope("json", errors);
+                return forward("error.jsp");
+            }
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
             Date from = sdf.parse(requestScope("from").toString());
             Date to = sdf.parse(requestScope("to").toString());
