@@ -12,7 +12,6 @@
 </head>
 <body>
   <script type="text/javascript">
-var dialog = null;
 $(function() {
 
 	$("#search_button").click(function() {
@@ -31,10 +30,10 @@ $(function() {
                     return (value.toString().length < 2) ? '0' + value : value;
                 }
                 function createCell(value) {
-                    var date_cell = $("<td></td>");
+                    var date_cell = $("<td><" + "/" + "td>");
                 }
                 function createInput(type, clazz) {
-                    var input = $("<input></input>");
+                    var input = $("<input><" + "/" + "input>");
                     input.attr("type", type);
                     input.addClass(clazz);
                     return input;
@@ -42,7 +41,7 @@ $(function() {
                 $(".list > table tr.detail").empty().remove();
                 for (i = 0; i < data.length; i++) {
                     v = data[i];
-                    var row = $("<tr></tr>");
+                    var row = $("<tr><" + "/" + "tr>");
                     row.addClass("detail");
                     // 日付
                     var date_input = createInput("text", "date_chooser date");
@@ -50,41 +49,41 @@ $(function() {
                         var dt = new Date(v.date);
                         date_input.attr("value", dt.getUTCFullYear() + "/" + pad(dt.getUTCMonth() + 1) + "/" + pad(dt.getUTCDate()));
                     }
-                    row.append($("<td></td>").addClass("date").append(date_input));
+                    row.append($("<td><" + "/" + "td>").addClass("date").append(date_input));
                     // 開始
                     var from_input = createInput("text", "from");
                     if (v.from != undefined) {
                         var dt = new Date(v.from);
                         from_input.attr("value", pad(dt.getUTCHours()) + ":" + pad(dt.getUTCMinutes()));
                     }
-                    row.append($("<td></td>").addClass("from").append(from_input));
+                    row.append($("<td><" + "/" + "td>").addClass("from").append(from_input));
                     // 終了
                     var to_input = createInput("text", "to");
                     if (v.to != undefined) {
                         var dt = new Date(v.to);
                         to_input.attr("value", pad(dt.getUTCHours()) + ":" + pad(dt.getUTCMinutes()));
                     }
-                    row.append($("<td></td>").addClass("to").append(to_input));
+                    row.append($("<td><" + "/" + "td>").addClass("to").append(to_input));
                     // コード
                     var code_input = createInput("text", "code");
                     if (v.code != undefined) {
                         code_input.attr("value", $("<div>").html(v.code).html());
                     }
-                    row.append($("<td></td>").addClass("code").append(code_input));
+                    row.append($("<td><" + "/" + "td>").addClass("code").append(code_input));
                     // コード
                     var work_input = createInput("text", "work");
                     if (v.work != undefined) {
                         work_input.attr("value", $("<div>").html(v.work).html());
                     }
-                    row.append($("<td></td>").addClass("work").append(work_input));
+                    row.append($("<td><" + "/" + "td>").addClass("work").append(work_input));
                     // 備考
                     var remark_input = createInput("text", "remark");
                     if (v.remark != undefined) {
                         remark_input.attr("value", $("<div>").html(v.remark).html());
                     }
-                    row.append($("<td></td>").addClass("remark").append(remark_input));
+                    row.append($("<td><" + "/" + "td>").addClass("remark").append(remark_input));
                     // 操作
-                    var control_cell = $("<td></td>");
+                    var control_cell = $("<td><" + "/" + "td>");
                     control_cell.addClass("control");
                     if (v.key != undefined) {
                         // key
@@ -151,26 +150,26 @@ $(function() {
   </div>
 
 <div id="contents">
-<div class="ui-widget ui-corner-all search">
-	<form>
-		<input type="text" class="date_chooser" name="from">-<input type="text" class="date_chooser" name="to">
-		<input type="button" value="検索" id="search_button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
-	</form>
-</div>
-<br/>
-<div class="ui-widget ui-corner-all list">
-	<table summary="">
-		<tr class="header">
-			<th>日付</th>
-			<th>開始</th>
-			<th>終了</th>
-			<th>コード</th>
-			<th>内容</th>
-			<th>備考</th>
-			<th>操作</th>
-		</tr>
-	</table>
-</div>
+	<div class="ui-widget ui-corner-all search">
+		<form>
+			<input type="text" class="date_chooser" name="from">-<input type="text" class="date_chooser" name="to">
+			<input type="button" value="検索" id="search_button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+		</form>
+	</div>
+	<br/>
+	<div class="ui-widget ui-corner-all list">
+		<table summary="">
+			<tr class="header">
+				<th>日付</th>
+				<th>開始</th>
+				<th>終了</th>
+				<th>コード</th>
+				<th>内容</th>
+				<th>備考</th>
+				<th>操作</th>
+			</tr>
+		</table>
+	</div>
 </div>
 <div id="loader"></div>
 </body>

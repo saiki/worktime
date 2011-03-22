@@ -44,7 +44,7 @@ function del(button) {
 			"key": $(td).find("input.key").val()
 		},
 		cache: false,
-		url: "/worktime/delte",
+		url: "/worktime/delete",
 		success: function(data, status, request) {
 			
 		},
