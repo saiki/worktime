@@ -2,6 +2,7 @@ package jp.saiki.worktime.controller.worktime;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,13 +17,24 @@ public class IndexController extends Controller {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
         Calendar cal = Calendar.getInstance();
         Map<String, Object> json = new HashMap<String, Object>();
-        cal.add(Calendar.DAY_OF_YEAR, -7);
-        json.put("from", sdf.format(cal.getTime()));
-        cal.add(Calendar.DAY_OF_YEAR, 14);
-        json.put("to", sdf.format(cal.getTime()));
+        // From
+        json.put("from", sdf.format(getFirstDay(cal)));
+        // To
+        json.put("to", sdf.format(getLastDay(cal)));
         
         requestScope("json", json);
         
         return forward("json.jsp");
+    }
+    
+    private Date getFirstDay(Calendar cal) {
+        cal.set(Calendar.DAY_OF_MONTH, 1);
+        return cal.getTime();
+    }
+    
+    private Date getLastDay(Calendar cal) {
+        cal.add(Calendar.MONTH, 1);
+        cal.add(Calendar.DAY_OF_YEAR, -1);
+        return cal.getTime();
     }
 }
