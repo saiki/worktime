@@ -75,8 +75,8 @@ public class WorkTimeService {
         List<WorkTime> ret = null;
         
         ret = Datastore.query(meta)
-            .filter(meta.date.greaterThan(from))
-            .filter(meta.date.lessThan(to))
+            .filter(meta.date.greaterThanOrEqual(from))
+            .filter(meta.date.lessThanOrEqual(to))
             .sort(meta.date.asc)
             .sort(meta.from.asc)
             .asList();
