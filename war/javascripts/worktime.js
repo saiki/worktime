@@ -93,28 +93,28 @@ function search() {
                     key_input.attr("value", $("<div>").html(v.key).html());
                     control_cell.append(key_input);
                     // 削除ボタン
-                    var delete_button = createInput("button", "ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only");
+                    var delete_button = createInput("button", "ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only delete");
                     delete_button.attr("value", "削除");
-                    delete_button.attr("onclick", "del(this); return false;");
                     control_cell.append(delete_button);
                     // 更新ボタン
-                    var update_button = createInput("button", "ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only");
+                    var update_button = createInput("button", "ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only update");
                     update_button.attr("value", "更新");
-                    update_button.attr("onclick", "save(this); return false;");
                     control_cell.append(update_button);
                 } else {
                     // 更新ボタン
-                    var insert_button = createInput("button", "ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only");
+                    var insert_button = createInput("button", "ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only insert");
                     insert_button.attr("type", "button");
                     insert_button.attr("value", "登録");
                     insert_button.attr("class", "ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only");
-                    insert_button.attr("onclick", "save(this); return false;");
                     control_cell.append(insert_button);
                 }
                 row.append(control_cell);
 
                 $(".list > table").append(row);
             }
+            $(".list > table td.control input.insert").click(function(){save($(this));return false;});
+            $(".list > table td.control input.update").click(function(){save($(this));return false;});
+            $(".list > table td.control input.delete").click(function(){del($(this));return false;});
             $(".date_chooser").datepicker();
         },
         error: function(request, status) {

@@ -1,8 +1,8 @@
-<!-- Indices written at Fri, 15 Apr 2011 12:39:31 UTC -->
+<!-- Indices written at Sun, 1 May 2011 05:52:18 UTC -->
 
 <datastore-indexes>
 
-    <!-- Used 1 time in query history -->
+    <!-- Used 10 times in query history -->
     <datastore-index kind="WorkTime" ancestor="false" source="auto">
         <property name="date" direction="asc"/>
         <property name="from" direction="asc"/>

@@ -51,12 +51,13 @@
         <dispatcher>ERROR</dispatcher>
     </filter-mapping>
     
+<!-- 
     <servlet>
         <servlet-name>GlobalTransactionServlet</servlet-name>
         <servlet-class>org.slim3.datastore.GlobalTransactionServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
-    
+  -->
     <!--
     <servlet>
         <servlet-name>GWTServiceServlet</servlet-name>
@@ -65,16 +66,20 @@
     </servlet>
     -->
 
+<!-- 
     <servlet>
         <servlet-name>KtrWjrServiceServlet</servlet-name>
         <servlet-class>bufferings.ktr.wjr.server.service.KtrWjrServiceServlet</servlet-class>
     </servlet>
+ -->
 
+<!-- 
     <servlet-mapping>
         <servlet-name>GlobalTransactionServlet</servlet-name>
         <url-pattern>/slim3/gtx</url-pattern>
     </servlet-mapping>
-    
+ -->
+ 
     <!--
     <servlet-mapping>
         <servlet-name>GWTServiceServlet</servlet-name>
@@ -82,11 +87,13 @@
     </servlet-mapping>
     -->
 
+<!-- 
     <servlet-mapping>
         <servlet-name>KtrWjrServiceServlet</servlet-name>
         <url-pattern>/ktrwjr/ktrwjr/ktrwjr.s3gwt</url-pattern>
     </servlet-mapping>
-    
+ -->
+ 
     <security-constraint>
         <web-resource-collection>
             <url-pattern>/*</url-pattern>
@@ -102,6 +109,7 @@
         <auth-constraint>
         </auth-constraint>
     </security-constraint>
+<!-- 
     <security-constraint>
         <web-resource-collection>
             <url-pattern>/slim3/gtx</url-pattern>
@@ -118,4 +126,5 @@
             <role-name>admin</role-name>
         </auth-constraint>
     </security-constraint>
+ -->
 </web-app>
