@@ -113,6 +113,13 @@ function search() {
             $(".list > table td.control input.insert").click(function(){save($(this));return false;});
             $(".list > table td.control input.update").click(function(){save($(this));return false;});
             $(".list > table td.control input.delete").click(function(){del($(this));return false;});
+            
+            $(".list > table td.date").click(function(){$(this).children("input").focus(); return false;});
+            $(".list > table td.from").click(function(){$(this).children("input").focus(); return false;});
+            $(".list > table td.to").click(function(){$(this).children("input").focus(); return false;});
+            $(".list > table td.work").click(function(){$(this).children("input").focus(); return false;});
+            $(".list > table td.remark").click(function(){$(this).children("input").focus(); return false;});
+
             $(".date_chooser").datepicker();
         },
         error: function(request, status) {

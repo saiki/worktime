@@ -38,6 +38,7 @@ body {
 
 .list table td.date, .list table td.from, .list table td.to, .list table td.code, .list table td.work, .list table td.remark {
     padding: 0px;
+    background-color: #FFFFFF;
 }
 
 .list table td.date input, .list table td.from input, .list table td.to input, .list table td.code input, .list table td.work input, .list table td.remark input {
@@ -45,14 +46,13 @@ body {
     border: 0px;
     border-style: none;
     padding: 0px;
-    height: 22px;
 }
 
 .list table td.control input.ui-button {
-    padding-bottom: 0.2em;
-    padding-left: 0.7em;
-    padding-right: 0.7em;
-    padding-top: 0.2em;
+    padding-bottom: 1px;
+    padding-left: 7px;
+    padding-right: 7px;
+    padding-top: 1px;
 }
 
 div#loader {
