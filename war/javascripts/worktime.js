@@ -101,11 +101,9 @@ function search() {
                     update_button.attr("value", "更新");
                     control_cell.append(update_button);
                 } else {
-                    // 更新ボタン
+                    // 登録ボタン
                     var insert_button = createInput("button", "ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only insert");
-                    insert_button.attr("type", "button");
                     insert_button.attr("value", "登録");
-                    insert_button.attr("class", "ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only");
                     control_cell.append(insert_button);
                 }
                 row.append(control_cell);
