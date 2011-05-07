@@ -1,0 +1,46 @@
+@CHARSET "UTF-8";
+
+div#menu {
+  border-bottom-color: black;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  background-color: #ccffcc;
+  padding-left: 10px;
+  /* For WebKit (Safari, Google Chrome etc) */
+  background: -webkit-gradient(linear, left top, left bottom, from(#ccffcc), to(#fff));
+  /* For Mozilla/Gecko (Firefox etc) */
+  background: -moz-linear-gradient(top, #ccffcc, #fff);
+  /* For Internet Explorer 5.5 - 7 */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#ccffcc, endColorstr=#FFFFFFFF);
+  /* For Internet Explorer 8 */
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#ccffccind, endColorstr=#FFFFFFFF)";
+  margin: 0px;
+}
+
+div#menu ul {
+  margin: 0px;
+  padding: 0px;
+}
+
+div#menu ul li {
+  list-style: none;
+  float: left;
+  margin-right: 10px;
+  padding-right: 10px;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  border-right-style: solid;
+  border-right-color: black;
+  border-right-width: 1px;
+  border-collapse: collapse;
+}
+
+div#menu ul li a {
+  text-decoration: none;
+  font-weight: bold;
+  color: green;
+}
+
+div#menu ul li a:hover {
+
+}
