@@ -29,10 +29,12 @@ div#menu ul li {
   padding-right: 10px;
   padding-bottom: 5px;
   padding-top: 5px;
+/*
   border-right-style: solid;
   border-right-color: black;
   border-right-width: 1px;
   border-collapse: collapse;
+*/
 }
 
 div#menu ul li a {

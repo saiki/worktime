@@ -1,40 +1,32 @@
-$(function(){
-	var _locale = "";
-	if (window.navigator.language){
-		// for FF, Chrome, Safari
-		_locale = window.navigator.language.toLowerCase().substring(0, 2);
-	} else if (window.navigator.userLanguage){
-		// For IE
-		_locale = window.navigator.userLanguage.toLowerCase().substring(0, 2);;
-	}
-	$.datepicker.setDefaults($.datepicker.regional[_locale]);
-});
+var WorkTime = function(input_from, input_to, search_button, list_wrap) {
+	this.input_from = input_from;
+	this.input_to = input_to;
+	this.search_button = search_button;
+	this.list_wrap = list_wrap;
+	this.list_data = null;
+}
 
-function setSearchOnClick(id) {
-	$("#" + id).click(function() {
-		search();
+WorkTime.prototype.init = function() {
+	var w = this;
+	$(this.search_button).click(function(){
+		w.search();
 	});
 }
 
-function search() {
+WorkTime.prototype.search = function() {
+	var wt = this;
     $("#loader").empty().addClass("loading").show();
 	$.ajax({
 		dataType: "json",
         type: "POST",
-        data: {
-                from: $(".search input[name=from]").val(),
-                to: $(".search input[name=to]").val(),
-        },
+        data: this.getFromTo(),
         cache: false,
         url: "/worktime/json",
         success: function(data, status, request) {
-            function pad(value) {
-                return (value.toString().length < 2) ? '0' + value : value;
+            function cell() {
+                return $("<td><" + "/" + "td>");
             }
-            function createCell(value) {
-                var date_cell = $("<td><" + "/" + "td>");
-            }
-            function createInput(type, clazz) {
+            function input(type, clazz) {
                 var input = $("<input><" + "/" + "input>");
                 input.attr("type", type);
                 input.addClass(clazz);
@@ -43,76 +35,77 @@ function search() {
             $(".list > table tr.detail").empty().remove();
             for (i = 0; i < data.length; i++) {
                 v = data[i];
-                var row = $("<tr><" + "/" + "tr>");
-                row.addClass("detail");
+                var row = $("<tr><" + "/" + "tr>").addClass("detail");
                 // 日付
-                var date_input = createInput("text", "date_chooser date");
+                var date_input = input("text", "date_chooser date");
                 if (v.date != undefined) {
-                    var dt = new Date(v.date);
-                    date_input.attr("value", dt.getUTCFullYear() + "/" + pad(dt.getUTCMonth() + 1) + "/" + pad(dt.getUTCDate()));
+                    date_input.attr("value", makeFormatDate(new Date(v.date)));
                 }
-                row.append($("<td><" + "/" + "td>").addClass("date").append(date_input));
+                row.append(cell().addClass("date").append(date_input));
                 // 開始
-                var from_input = createInput("text", "from");
+                var from_input = input("text", "from");
                 if (v.from != undefined) {
-                    var dt = new Date(v.from);
-                    from_input.attr("value", pad(dt.getUTCHours()) + ":" + pad(dt.getUTCMinutes()));
+                    from_input.attr("value", makeFormatTime(new Date(v.from)));
                 }
-                row.append($("<td><" + "/" + "td>").addClass("from").append(from_input));
+                row.append(cell().addClass("from").append(from_input));
                 // 終了
-                var to_input = createInput("text", "to");
+                var to_input = input("text", "to");
                 if (v.to != undefined) {
-                    var dt = new Date(v.to);
-                    to_input.attr("value", pad(dt.getUTCHours()) + ":" + pad(dt.getUTCMinutes()));
+                    to_input.attr("value", makeFormatTime(new Date(v.to)));
                 }
-                row.append($("<td><" + "/" + "td>").addClass("to").append(to_input));
+                row.append(cell().addClass("to").append(to_input));
                 // コード
-                var code_input = createInput("text", "code");
+                var code_input = input("text", "code");
                 if (v.code != undefined) {
-                    code_input.attr("value", $("<div>").html(v.code).html());
+                    code_input.attr("value", escape(v.code));
                 }
-                row.append($("<td><" + "/" + "td>").addClass("code").append(code_input));
+                row.append(cell().addClass("code").append(code_input));
                 // 内容
-                var work_input = createInput("text", "work");
+                var work_input = input("text", "work");
                 if (v.work != undefined) {
-                    work_input.attr("value", $("<div>").html(v.work).html());
+                    work_input.attr("value", escape(v.work));
                 }
-                row.append($("<td><" + "/" + "td>").addClass("work").append(work_input));
+                row.append(cell().addClass("work").append(work_input));
                 // 備考
-                var remark_input = createInput("text", "remark");
+                var remark_input = input("text", "remark");
                 if (v.remark != undefined) {
-                    remark_input.attr("value", $("<div>").html(v.remark).html());
+                    remark_input.attr("value", escape(v.remark));
                 }
-                row.append($("<td><" + "/" + "td>").addClass("remark").append(remark_input));
+                row.append(cell().addClass("remark").append(remark_input));
                 // 操作
-                var control_cell = $("<td><" + "/" + "td>");
-                control_cell.addClass("control");
+                var control_cell = cell().addClass("control");
                 if (v.key != undefined) {
                     // key
-                    var key_input = createInput("hidden", "key");
-                    key_input.attr("value", $("<div>").html(v.key).html());
+                    var key_input = input("hidden", "key").attr("value", escape(v.key));
                     control_cell.append(key_input);
                     // 削除ボタン
-                    var delete_button = createInput("button", "ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only delete");
-                    delete_button.attr("value", "削除");
+                    var delete_button = input("button", "ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only delete").attr("value", "削除");
                     control_cell.append(delete_button);
                     // 更新ボタン
-                    var update_button = createInput("button", "ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only update");
-                    update_button.attr("value", "更新");
+                    var update_button = input("button", "ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only update").attr("value", "更新");
                     control_cell.append(update_button);
                 } else {
                     // 登録ボタン
-                    var insert_button = createInput("button", "ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only insert");
-                    insert_button.attr("value", "登録");
+                    var insert_button = input("button", "ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only insert").attr("value", "登録");
                     control_cell.append(insert_button);
                 }
                 row.append(control_cell);
 
                 $(".list > table").append(row);
             }
-            $(".list > table td.control input.insert").click(function(){save($(this));return false;});
-            $(".list > table td.control input.update").click(function(){save($(this));return false;});
-            $(".list > table td.control input.delete").click(function(){del($(this));return false;});
+        },
+        error: function(request, status) {
+        	var errors = JSON.parse(request.responseText);
+        	console.log(errors);
+        	$("#message").empty().append($("<ul></ul>"));
+        	for (key in errors) {
+        		$("#message ul").append($("<li></li>").addClass("error").html(errors[key]));
+        	}
+        },
+        complete: function(request, status) {
+            $(".list > table td.control input.insert").click(function(){wt.save($(this));return false;});
+            $(".list > table td.control input.update").click(function(){wt.save($(this));return false;});
+            $(".list > table td.control input.delete").click(function(){wt.delete($(this));return false;});
             
             $(".list > table td.date").click(function(){$(this).children("input").focus(); return false;});
             $(".list > table td.from").click(function(){$(this).children("input").focus(); return false;});
@@ -121,19 +114,13 @@ function search() {
             $(".list > table td.remark").click(function(){$(this).children("input").focus(); return false;});
 
             $(".date_chooser").datepicker();
-        },
-        error: function(request, status) {
-            console.log(request);
-            console.log(status);
-            var message = $("#message");
-        },
-        complete: function(request, status) {
+
             $('#loader').removeClass('loading').append(this);
         }
 	});
 }
 
-function save(button) {
+WorkTime.prototype.save = function(button) {
 	var row = $(button).parent().parent();
     $.ajax({
         dataType: "json",
@@ -151,15 +138,16 @@ function save(button) {
         url: "/worktime/save",
         success: function(data, status, request) {
         	search();
-//            $(row).find("td.control > input.key").val(data.key);
         },
         error: function(request, status, thrown) {
-			
+			console.log(request);
+			console.log(status);
+			console.log(thrown);			
         }
     });
 }
 
-function del(button) {
+WorkTime.prototype.delete = function(button) {
 	var td = $(button).parent();
 	$.ajax({
 		dataType: "json",
@@ -173,7 +161,16 @@ function del(button) {
 			search();
 		},
 		error: function(request, status, thrown) {
-
+			console.log(request);
+			console.log(status);
+			console.log(thrown);
 		}
 	});
+}
+
+WorkTime.prototype.getFromTo = function() {
+	return {
+        from: $(this.input_from).val(),
+        to: $(this.input_to).val()
+	}
 }

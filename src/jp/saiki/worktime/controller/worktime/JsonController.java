@@ -65,8 +65,8 @@ public class JsonController extends Controller {
     
     protected boolean validate() {
         Validators v = new Validators(request);
-        v.add("from", v.dateType("yyyy/MM/dd"));
-        v.add("to", v.dateType("yyyy/MM/dd"));
+        v.add("from", v.required(), v.dateType("yyyy/MM/dd"));
+        v.add("to", v.required(), v.dateType("yyyy/MM/dd"));
         
         return v.validate();
     }

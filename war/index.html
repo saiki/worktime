@@ -9,6 +9,7 @@
   <script type="text/javascript" src="/javascripts/jquery-1.4.4.min.js"></script>
   <script type="text/javascript" src="/javascripts/jquery-ui-1.8.7.custom.min.js"></script>
   <script type="text/javascript" src="/javascripts/jquery-ui-i18n.js"></script>
+  <script type="text/javascript" src="/javascripts/common.js"></script>
   <script type="text/javascript" src="/javascripts/worktime.js"></script>
   <title>作業時間記録</title>
 </head>
@@ -17,7 +18,7 @@
 	<div id="menu">
 		<ul>
     		<li><a href="/">作業時間記録</a></li>
-    		<li><a href="/">作業時間記録</a></li>
+    		<!-- <li><a href="/">&nbsp;</a></li> -->
 		</ul>
 		<p class="clear"></p>
 	</div>
@@ -48,28 +49,20 @@
 </div>
 <div id="loader"></div>
   <script type="text/javascript">
+    var worktime = null;
 $(function() {
 
-    setSearchOnClick("search_button");
-    $(".list table tr.detail").focus(function() {
-        $(this).addClass("active");
-    });
-    $(".list table tr.detail").click(function() {
-        $(this).addClass("active");
+    worktime = new WorkTime($(".search input[name=from]"), $(".search input[name=to]"), $("#search_button"), $("div.list"));
+    worktime.init();
+    
+    $.getJSON("/worktime/", {}, function(data, status, xhr) {
+        worktime.input_from.val(data.from);
+        worktime.input_to.val(data.to);
+        worktime.search();
     });
     
-    $(".list table tr.detail").blur(function() {
-        $(this).removeClass("active");
-    });
-
-    $.getJSON("/worktime/", {}, function(data, status, xhr) {
-        $(".search input[name=from]").val(data.from);
-        $(".search input[name=to]").val(data.to);
-        $("#search_button").click();
-    });
     $(".date_chooser").datepicker();
 });
-
   </script>
 </body>
 </html>

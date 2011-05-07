@@ -3,3 +3,8 @@
 .clear {
   clear: both;
 }
+
+.error {
+  color: red;
+  font-weight: bold;
+}
