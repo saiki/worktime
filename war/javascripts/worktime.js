@@ -96,7 +96,6 @@ WorkTime.prototype.search = function() {
         },
         error: function(request, status) {
         	var errors = JSON.parse(request.responseText);
-        	console.log(errors);
         	$("#message").empty().append($("<ul></ul>"));
         	for (key in errors) {
         		$("#message ul").append($("<li></li>").addClass("error").html(errors[key]));
@@ -140,9 +139,11 @@ WorkTime.prototype.save = function(button) {
         	search();
         },
         error: function(request, status, thrown) {
-			console.log(request);
-			console.log(status);
-			console.log(thrown);			
+        	var errors = JSON.parse(request.responseText);
+        	$("#message").empty().append($("<ul></ul>"));
+        	for (key in errors) {
+        		$("#message ul").append($("<li></li>").addClass("error").html(errors[key]));
+        	}
         }
     });
 }
@@ -161,9 +162,11 @@ WorkTime.prototype.delete = function(button) {
 			search();
 		},
 		error: function(request, status, thrown) {
-			console.log(request);
-			console.log(status);
-			console.log(thrown);
+        	var errors = JSON.parse(request.responseText);
+        	$("#message").empty().append($("<ul></ul>"));
+        	for (key in errors) {
+        		$("#message ul").append($("<li></li>").addClass("error").html(errors[key]));
+        	}
 		}
 	});
 }
