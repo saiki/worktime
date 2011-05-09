@@ -104,7 +104,7 @@ WorkTime.prototype.search = function() {
         complete: function(request, status) {
             $(".list > table td.control input.insert").click(function(){wt.save($(this));return false;});
             $(".list > table td.control input.update").click(function(){wt.save($(this));return false;});
-            $(".list > table td.control input.delete").click(function(){wt.delete($(this));return false;});
+            $(".list > table td.control input.delete").click(function(){wt.remove($(this));return false;});
             
             $(".list > table td.date").click(function(){$(this).children("input").focus(); return false;});
             $(".list > table td.from").click(function(){$(this).children("input").focus(); return false;});
@@ -120,6 +120,7 @@ WorkTime.prototype.search = function() {
 }
 
 WorkTime.prototype.save = function(button) {
+	var w = this;
 	var row = $(button).parent().parent();
     $.ajax({
         dataType: "json",
@@ -136,7 +137,7 @@ WorkTime.prototype.save = function(button) {
         cache: false,
         url: "/worktime/save",
         success: function(data, status, request) {
-        	search();
+        	w.search();
         },
         error: function(request, status, thrown) {
         	var errors = JSON.parse(request.responseText);
@@ -148,7 +149,8 @@ WorkTime.prototype.save = function(button) {
     });
 }
 
-WorkTime.prototype.delete = function(button) {
+WorkTime.prototype.remove = function(button) {
+	var w = this;
 	var td = $(button).parent();
 	$.ajax({
 		dataType: "json",
@@ -159,7 +161,7 @@ WorkTime.prototype.delete = function(button) {
 		cache: false,
 		url: "/worktime/delete",
 		success: function(data, status, request) {
-			search();
+			w.search();
 		},
 		error: function(request, status, thrown) {
         	var errors = JSON.parse(request.responseText);
