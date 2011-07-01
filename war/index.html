@@ -52,14 +52,10 @@
     var worktime = null;
 $(function() {
 
+    $(".search input[name=from]").val(makeFormatDate(new Date()));
+    $(".search input[name=to]").val(makeFormatDate(new Date()));
     worktime = new WorkTime($(".search input[name=from]"), $(".search input[name=to]"), $("#search_button"), $("div.list"));
     worktime.init();
-    
-    $.getJSON("/worktime/", {}, function(data, status, xhr) {
-        worktime.input_from.val(data.from);
-        worktime.input_to.val(data.to);
-        worktime.search();
-    });
     
     $(".date_chooser").datepicker();
 });
