@@ -7,10 +7,11 @@ var WorkTime = function(input_from, input_to, search_button, list_wrap) {
 }
 
 WorkTime.prototype.init = function() {
-	var w = this;
+	var self = this;
 	$(this.search_button).click(function(){
-		w.search();
+		self.search();
 	});
+	this.search();
 }
 
 WorkTime.prototype.search = function() {

@@ -14,11 +14,19 @@ function lpad(value, length, padstr) {
     return (value.toString().length < length) ? lpad(padstr + value, length, padstr) : value;
 }
 function makeFormatDate(dt) {
-	return dt.getUTCFullYear() + "/" + lpad(dt.getUTCMonth() + 1, 2, '0') + "/" + lpad(dt.getUTCDate(), 2, '0');
+	return dt.getFullYear() + "/" + lpad(dt.getMonth() + 1, 2, '0') + "/" + lpad(dt.getDate(), 2, '0');
 }
 function makeFormatTime(dt) {
 	return lpad(dt.getUTCHours(), 2, '0') + ":" + lpad(dt.getUTCMinutes(), 2, '0');
 }
 function escape(value) {
 	return $("<div>").html(value).html();
+}
+
+function getMonthLastDay(year, month) {
+	return new Date(year, month + 1, 0);
+}
+
+function getMonthFirstDay(year, month) {
+	return new Date(year, month, 1);
 }
