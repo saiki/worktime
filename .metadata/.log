@@ -1,0 +1,118 @@
+!SESSION 2011-07-01 23:15:43.158 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.6.0_26
+java.vendor=Apple Inc.
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=ja_JP
+Framework arguments:  -product org.eclipse.epp.package.java.product -product org.eclipse.epp.package.java.product -keyring /Users/saiki/.eclipse_keyring -showlocation
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product org.eclipse.epp.package.java.product -data /Users/saiki/Projects/gae/java/worktime -product org.eclipse.epp.package.java.product -keyring /Users/saiki/.eclipse_keyring -showlocation
+
+!ENTRY org.eclipse.core.net 1 0 2011-07-01 23:16:02.986
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+
+!ENTRY org.eclipse.ui.workbench 2 0 2011-07-01 23:16:13.408
+!MESSAGE A handler conflict occurred.  This may disable some commands.
+!SUBENTRY 1 org.eclipse.ui.workbench 2 0 2011-07-01 23:16:13.409
+!MESSAGE Conflict for 'AUTOGEN:::org.maven.ide.eclipse.openPomDependencyNode/org.maven.ide.eclipse.ui.openPomDependency':
+HandlerActivation(commandId=AUTOGEN:::org.maven.ide.eclipse.openPomDependencyNode/org.maven.ide.eclipse.ui.openPomDependency,
+	handler=ActionDelegateHandlerProxy(null,org.maven.ide.eclipse.actions.OpenPomAction),
+	expression=WorkbenchWindowExpression(org.eclipse.ui.internal.WorkbenchWindow@132f4538),sourcePriority=16384)
+HandlerActivation(commandId=AUTOGEN:::org.maven.ide.eclipse.openPomDependencyNode/org.maven.ide.eclipse.ui.openPomDependency,
+	handler=ActionDelegateHandlerProxy(null,org.maven.ide.eclipse.actions.OpenPomAction),
+	expression=WorkbenchWindowExpression(org.eclipse.ui.internal.WorkbenchWindow@132f4538),sourcePriority=16384)
+!SUBENTRY 1 org.eclipse.ui.workbench 2 0 2011-07-01 23:16:13.409
+!MESSAGE Conflict for 'AUTOGEN:::org.eclipse.eclipsemonkey.emFileContextMenu/org.eclipse.eclipsemonkey.action4':
+HandlerActivation(commandId=AUTOGEN:::org.eclipse.eclipsemonkey.emFileContextMenu/org.eclipse.eclipsemonkey.action4,
+	handler=ActionDelegateHandlerProxy(null,org.eclipse.eclipsemonkey.actions.PublishScriptForWiki),
+	expression=WorkbenchWindowExpression(org.eclipse.ui.internal.WorkbenchWindow@132f4538),sourcePriority=16384)
+HandlerActivation(commandId=AUTOGEN:::org.eclipse.eclipsemonkey.emFileContextMenu/org.eclipse.eclipsemonkey.action4,
+	handler=ActionDelegateHandlerProxy(null,org.eclipse.eclipsemonkey.actions.PublishScriptForWiki),
+	expression=WorkbenchWindowExpression(org.eclipse.ui.internal.WorkbenchWindow@132f4538),sourcePriority=16384)
+!SUBENTRY 1 org.eclipse.ui.workbench 2 0 2011-07-01 23:16:13.409
+!MESSAGE Conflict for 'AUTOGEN:::org.eclipse.eclipsemonkey.emFileContextMenu/org.eclipse.eclipsemonkey.action5':
+HandlerActivation(commandId=AUTOGEN:::org.eclipse.eclipsemonkey.emFileContextMenu/org.eclipse.eclipsemonkey.action5,
+	handler=ActionDelegateHandlerProxy(null,org.eclipse.eclipsemonkey.actions.PublishScript),
+	expression=WorkbenchWindowExpression(org.eclipse.ui.internal.WorkbenchWindow@132f4538),sourcePriority=16384)
+HandlerActivation(commandId=AUTOGEN:::org.eclipse.eclipsemonkey.emFileContextMenu/org.eclipse.eclipsemonkey.action5,
+	handler=ActionDelegateHandlerProxy(null,org.eclipse.eclipsemonkey.actions.PublishScript),
+	expression=WorkbenchWindowExpression(org.eclipse.ui.internal.WorkbenchWindow@132f4538),sourcePriority=16384)
+!SUBENTRY 1 org.eclipse.ui.workbench 2 0 2011-07-01 23:16:13.409
+!MESSAGE Conflict for 'AUTOGEN:::org.eclipse.eclipsemonkey.emFileContextMenu/org.eclipse.eclipsemonkey.action2':
+HandlerActivation(commandId=AUTOGEN:::org.eclipse.eclipsemonkey.emFileContextMenu/org.eclipse.eclipsemonkey.action2,
+	handler=ActionDelegateHandlerProxy(null,org.eclipse.eclipsemonkey.actions.PublishScriptForBlogger),
+	expression=WorkbenchWindowExpression(org.eclipse.ui.internal.WorkbenchWindow@132f4538),sourcePriority=16384)
+HandlerActivation(commandId=AUTOGEN:::org.eclipse.eclipsemonkey.emFileContextMenu/org.eclipse.eclipsemonkey.action2,
+	handler=ActionDelegateHandlerProxy(null,org.eclipse.eclipsemonkey.actions.PublishScriptForBlogger),
+	expression=WorkbenchWindowExpression(org.eclipse.ui.internal.WorkbenchWindow@132f4538),sourcePriority=16384)
+!SUBENTRY 1 org.eclipse.ui.workbench 2 0 2011-07-01 23:16:13.409
+!MESSAGE Conflict for 'AUTOGEN:::org.eclipse.eclipsemonkey.emFileContextMenu/org.eclipse.eclipsemonkey.action6':
+HandlerActivation(commandId=AUTOGEN:::org.eclipse.eclipsemonkey.emFileContextMenu/org.eclipse.eclipsemonkey.action6,
+	handler=ActionDelegateHandlerProxy(null,org.eclipse.eclipsemonkey.actions.PublishScriptForEmail),
+	expression=WorkbenchWindowExpression(org.eclipse.ui.internal.WorkbenchWindow@132f4538),sourcePriority=16384)
+HandlerActivation(commandId=AUTOGEN:::org.eclipse.eclipsemonkey.emFileContextMenu/org.eclipse.eclipsemonkey.action6,
+	handler=ActionDelegateHandlerProxy(null,org.eclipse.eclipsemonkey.actions.PublishScriptForEmail),
+	expression=WorkbenchWindowExpression(org.eclipse.ui.internal.WorkbenchWindow@132f4538),sourcePriority=16384)
+!SUBENTRY 1 org.eclipse.ui.workbench 2 0 2011-07-01 23:16:13.409
+!MESSAGE Conflict for 'AUTOGEN:::org.maven.ide.eclipse.openProjectPageDependencyNode/org.maven.ide.eclipse.ui.openPomDependencyUrl':
+HandlerActivation(commandId=AUTOGEN:::org.maven.ide.eclipse.openProjectPageDependencyNode/org.maven.ide.eclipse.ui.openPomDependencyUrl,
+	handler=ActionDelegateHandlerProxy(null,org.maven.ide.eclipse.actions.OpenUrlAction:org.maven.ide.eclipse.openProjectPage),
+	expression=WorkbenchWindowExpression(org.eclipse.ui.internal.WorkbenchWindow@132f4538),sourcePriority=16384)
+HandlerActivation(commandId=AUTOGEN:::org.maven.ide.eclipse.openProjectPageDependencyNode/org.maven.ide.eclipse.ui.openPomDependencyUrl,
+	handler=ActionDelegateHandlerProxy(null,org.maven.ide.eclipse.actions.OpenUrlAction:org.maven.ide.eclipse.openProjectPage),
+	expression=WorkbenchWindowExpression(org.eclipse.ui.internal.WorkbenchWindow@132f4538),sourcePriority=16384)
+
+!ENTRY org.eclipse.jface 2 0 2011-07-01 23:16:13.432
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2011-07-01 23:16:13.432
+!MESSAGE A conflict occurred for ALT+SHIFT+D R:
+Binding(ALT+SHIFT+D R,
+	ParameterizedCommand(Command(org.eclipse.rap.ui.launch.RAPLaunchShortcut.debug,Debug RAP Application,
+		Debug RAP Application,
+		Category(org.eclipse.debug.ui.category.run,Run/Debug,Run/Debug command category,true),
+		,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(ALT+SHIFT+D R,
+	ParameterizedCommand(Command(org.eclipse.wst.server.launchShortcut.debug,Debug on Server,
+		Debug the current selection on a server,
+		Category(org.eclipse.debug.ui.category.run,Run/Debug,Run/Debug command category,true),
+		,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2011-07-01 23:16:13.433
+!MESSAGE A conflict occurred for ALT+COMMAND+Q P:
+Binding(ALT+COMMAND+Q P,
+	ParameterizedCommand(Command(org.eclipse.ui.views.showView,Show View,
+		Shows a particular view,
+		Category(org.eclipse.ui.category.views,Views,Commands for opening views,true),
+		org.eclipse.ui.handlers.ShowViewHandler@7d740df7,
+		[Lorg.eclipse.ui.internal.commands.Parameter;@4e411379,,true),[Lorg.eclipse.core.commands.Parameterization;@12659512),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,cocoa,system)
+Binding(ALT+COMMAND+Q P,
+	ParameterizedCommand(Command(org.eclipse.ui.views.showView,Show View,
+		Shows a particular view,
+		Category(org.eclipse.ui.category.views,Views,Commands for opening views,true),
+		org.eclipse.ui.handlers.ShowViewHandler@7d740df7,
+		[Lorg.eclipse.ui.internal.commands.Parameter;@4e411379,,true),[Lorg.eclipse.core.commands.Parameterization;@4b1dda2d),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,cocoa,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2011-07-01 23:16:13.433
+!MESSAGE A conflict occurred for ALT+SHIFT+X R:
+Binding(ALT+SHIFT+X R,
+	ParameterizedCommand(Command(org.eclipse.rap.ui.launch.RAPLaunchShortcut.run,Run RAP Application,
+		Run RAP Application,
+		Category(org.eclipse.debug.ui.category.run,Run/Debug,Run/Debug command category,true),
+		,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(ALT+SHIFT+X R,
+	ParameterizedCommand(Command(org.eclipse.wst.server.launchShortcut.run,Run on Server,
+		Run the current selection on a server,
+		Category(org.eclipse.debug.ui.category.run,Run/Debug,Run/Debug command category,true),
+		,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)

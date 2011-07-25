@@ -41,12 +41,12 @@ div#contents {
 	border-collapse: collapse;
 }
 
-.list table td.date, .list table td.from, .list table td.to, .list table td.code, .list table td.work, .list table td.remark {
+.list table td.noborderinput {
     padding: 0px;
     background-color: #FFFFFF;
 }
 
-.list table td.date input, .list table td.from input, .list table td.to input, .list table td.code input, .list table td.work input, .list table td.remark input {
+.list table td.noborderinput input {
     margin: 0px;
     border: 0px;
     border-style: none;

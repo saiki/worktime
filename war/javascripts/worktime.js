@@ -42,37 +42,43 @@ WorkTime.prototype.search = function() {
                 if (v.date != undefined) {
                     date_input.attr("value", makeFormatDate(new Date(v.date)));
                 }
-                row.append(cell().addClass("date").append(date_input));
+                row.append(cell().addClass("date noborderinput").append(date_input));
                 // 開始
                 var from_input = input("text", "from");
                 if (v.from != undefined) {
                     from_input.attr("value", makeFormatTime(new Date(v.from)));
                 }
-                row.append(cell().addClass("from").append(from_input));
+                row.append(cell().addClass("from noborderinput").append(from_input));
                 // 終了
                 var to_input = input("text", "to");
                 if (v.to != undefined) {
                     to_input.attr("value", makeFormatTime(new Date(v.to)));
                 }
-                row.append(cell().addClass("to").append(to_input));
+                row.append(cell().addClass("to noborderinput").append(to_input));
+                // 時間
+                var time_input = input("text", "time");
+                if (v.to != undefined && v.to != undefined) {
+                	time_input.attr("value", calcDateSub(new Date(v.from), new Date(v.to)));
+                }
+                row.append(cell().addClass("time noborderinput").append(time_input));
                 // コード
                 var code_input = input("text", "code");
                 if (v.code != undefined) {
                     code_input.attr("value", escape(v.code));
                 }
-                row.append(cell().addClass("code").append(code_input));
+                row.append(cell().addClass("code noborderinput").append(code_input));
                 // 内容
                 var work_input = input("text", "work");
                 if (v.work != undefined) {
                     work_input.attr("value", escape(v.work));
                 }
-                row.append(cell().addClass("work").append(work_input));
+                row.append(cell().addClass("work noborderinput").append(work_input));
                 // 備考
                 var remark_input = input("text", "remark");
                 if (v.remark != undefined) {
                     remark_input.attr("value", escape(v.remark));
                 }
-                row.append(cell().addClass("remark").append(remark_input));
+                row.append(cell().addClass("remark noborderinput").append(remark_input));
                 // 操作
                 var control_cell = cell().addClass("control");
                 if (v.key != undefined) {
@@ -112,6 +118,9 @@ WorkTime.prototype.search = function() {
             $(".list > table td.to").click(function(){$(this).children("input").focus(); return false;});
             $(".list > table td.work").click(function(){$(this).children("input").focus(); return false;});
             $(".list > table td.remark").click(function(){$(this).children("input").focus(); return false;});
+            
+            $(".list > table td.from input").blur(function(){wt.calcTime($(this)); return false;});
+            $(".list > table td.to input").blur(function(){wt.calcTime($(this)); return false;});
 
             $(".date_chooser").datepicker();
 
@@ -172,6 +181,18 @@ WorkTime.prototype.remove = function(button) {
         	}
 		}
 	});
+}
+
+WorkTime.prototype.calcTime = function(input) {
+	var self = this;
+	var tr = $(input).parent().parent();
+	var date = tr.children("td.date").children("input").val();
+	var from = tr.children("td.from").children("input").val();
+	var to = tr.children("td.to").children("input").val();
+	if (!(date != "" && from != "" && to != "")) {
+		return;
+	}
+	tr.children("td.time").children("input").val(calcTimeSub(date, from, to));
 }
 
 WorkTime.prototype.getFromTo = function() {

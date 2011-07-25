@@ -30,3 +30,16 @@ function getMonthLastDay(year, month) {
 function getMonthFirstDay(year, month) {
 	return new Date(year, month, 1);
 }
+
+function calcTimeSub(date, from, to) {
+	if (!(date != "" && from != "" && to != "")) {
+		return;
+	}
+	var date_from = new Date(date + " " + from);
+	var date_to = new Date(date + " " + to);
+	return (date_to - date_from) / 1000 / 60 / 60;
+}
+
+function calcDateSub(date_from, date_to) {
+	return (date_to - date_from) / 1000 / 60 / 60;
+}
