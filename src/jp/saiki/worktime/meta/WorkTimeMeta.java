@@ -1,6 +1,6 @@
 package jp.saiki.worktime.meta;
 
-//@javax.annotation.Generated(value = { "slim3-gen", "@VERSION@" }, date = "2011-07-09 00:00:06")
+//@javax.annotation.Generated(value = { "slim3-gen", "@VERSION@" }, date = "2011-07-26 21:46:56")
 /** */
 public final class WorkTimeMeta extends org.slim3.datastore.ModelMeta<jp.saiki.worktime.model.WorkTime> {
 
@@ -18,6 +18,9 @@ public final class WorkTimeMeta extends org.slim3.datastore.ModelMeta<jp.saiki.w
 
     /** */
     public final org.slim3.datastore.StringAttributeMeta<jp.saiki.worktime.model.WorkTime> remark = new org.slim3.datastore.StringAttributeMeta<jp.saiki.worktime.model.WorkTime>(this, "remark", "remark");
+
+    /** */
+    public final org.slim3.datastore.CoreAttributeMeta<jp.saiki.worktime.model.WorkTime, java.lang.Double> rest = new org.slim3.datastore.CoreAttributeMeta<jp.saiki.worktime.model.WorkTime, java.lang.Double>(this, "rest", "rest", java.lang.Double.class);
 
     /** */
     public final org.slim3.datastore.CoreAttributeMeta<jp.saiki.worktime.model.WorkTime, java.util.Date> to = new org.slim3.datastore.CoreAttributeMeta<jp.saiki.worktime.model.WorkTime, java.util.Date>(this, "to", "to", java.util.Date.class);
@@ -50,6 +53,7 @@ public final class WorkTimeMeta extends org.slim3.datastore.ModelMeta<jp.saiki.w
         model.setFrom((java.util.Date) entity.getProperty("from"));
         model.setKey(entity.getKey());
         model.setRemark((java.lang.String) entity.getProperty("remark"));
+        model.setRest((java.lang.Double) entity.getProperty("rest"));
         model.setTo((java.util.Date) entity.getProperty("to"));
         model.setVersion((java.lang.Long) entity.getProperty("version"));
         model.setWork((java.lang.String) entity.getProperty("work"));
@@ -69,10 +73,11 @@ public final class WorkTimeMeta extends org.slim3.datastore.ModelMeta<jp.saiki.w
         entity.setProperty("date", m.getDate());
         entity.setProperty("from", m.getFrom());
         entity.setProperty("remark", m.getRemark());
+        entity.setProperty("rest", m.getRest());
         entity.setProperty("to", m.getTo());
         entity.setProperty("version", m.getVersion());
         entity.setProperty("work", m.getWork());
-        entity.setProperty("slim3.schemaVersion", 1);
+        entity.setProperty("slim3.schemaVersion", 2);
         return entity;
     }
 
@@ -155,6 +160,11 @@ public final class WorkTimeMeta extends org.slim3.datastore.ModelMeta<jp.saiki.w
             encoder = new org.slim3.datastore.json.Default();
             encoder.encode(writer, m.getRemark());
         }
+        if(m.getRest() != null){
+            writer.setNextPropertyName("rest");
+            encoder = new org.slim3.datastore.json.Default();
+            encoder.encode(writer, m.getRest());
+        }
         if(m.getTo() != null){
             writer.setNextPropertyName("to");
             encoder = new org.slim3.datastore.json.Default();
@@ -193,6 +203,9 @@ public final class WorkTimeMeta extends org.slim3.datastore.ModelMeta<jp.saiki.w
         reader = rootReader.newObjectReader("remark");
         decoder = new org.slim3.datastore.json.Default();
         m.setRemark(decoder.decode(reader, m.getRemark()));
+        reader = rootReader.newObjectReader("rest");
+        decoder = new org.slim3.datastore.json.Default();
+        m.setRest(decoder.decode(reader, m.getRest()));
         reader = rootReader.newObjectReader("to");
         decoder = new org.slim3.datastore.json.Default();
         m.setTo(decoder.decode(reader, m.getTo()));

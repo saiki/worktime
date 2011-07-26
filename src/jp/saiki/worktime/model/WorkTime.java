@@ -8,7 +8,7 @@ import com.google.appengine.api.datastore.Key;
 import org.slim3.datastore.Attribute;
 import org.slim3.datastore.Model;
 
-@Model(schemaVersion = 1)
+@Model(schemaVersion = 2)
 public class WorkTime implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -27,6 +27,9 @@ public class WorkTime implements Serializable {
     
     @Attribute
     private Date to;
+    
+    @Attribute
+    private Double rest;
     
     @Attribute
     private Integer code;
@@ -155,5 +158,13 @@ public class WorkTime implements Serializable {
 
     public static long getSerialversionuid() {
         return serialVersionUID;
+    }
+
+    public Double getRest() {
+        return rest;
+    }
+
+    public void setRest(Double rest) {
+        this.rest = rest;
     }
 }

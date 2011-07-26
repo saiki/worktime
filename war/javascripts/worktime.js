@@ -55,11 +55,24 @@ WorkTime.prototype.search = function() {
                     to_input.attr("value", makeFormatTime(new Date(v.to)));
                 }
                 row.append(cell().addClass("to noborderinput").append(to_input));
+                // 休憩時間
+                var rest_input = input("text", "rest");
+                var rest = 0;
+                if (v.version >= 2 && v.rest != undefined) {
+                	rest = v.rest;
+                }
+            	rest_input.attr("value", rest);
+                row.append(cell().addClass("rest noborderinput").append(rest_input));
                 // 時間
                 var time_input = input("text", "time");
-                if (v.to != undefined && v.to != undefined) {
-                	time_input.attr("value", calcDateSub(new Date(v.from), new Date(v.to)));
+                var time = 0;
+                if (v.from != undefined && v.to != undefined) {
+                	time = calcDateSub(new Date(v.from), new Date(v.to));
                 }
+                if (v.version >= 2 && v.rest != undefined) {
+                	time = time - v.rest;
+                }
+            	time_input.attr("value", time);
                 row.append(cell().addClass("time noborderinput").append(time_input));
                 // コード
                 var code_input = input("text", "code");
@@ -121,6 +134,7 @@ WorkTime.prototype.search = function() {
             
             $(".list > table td.from input").blur(function(){wt.calcTime($(this)); return false;});
             $(".list > table td.to input").blur(function(){wt.calcTime($(this)); return false;});
+            $(".list > table td.rest input").blur(function(){wt.calcTime($(this)); return false;});
 
             $(".date_chooser").datepicker();
 
@@ -140,6 +154,7 @@ WorkTime.prototype.save = function(button) {
             "date": $(row).find("td.date > input.date").val(),
             "from": $(row).find("td.from > input.from").val(),
             "to" : $(row).find("td.to > input.to").val(),
+            "rest": $(row).find("td.rest > input").val(),
             "code": $(row).find("td.code > input.code").val(),
             "work": $(row).find("td.work > input.work").val(),
             "remark": $(row).find("td.remark > input.remark").val()
@@ -189,10 +204,15 @@ WorkTime.prototype.calcTime = function(input) {
 	var date = tr.children("td.date").children("input").val();
 	var from = tr.children("td.from").children("input").val();
 	var to = tr.children("td.to").children("input").val();
+	var rest = tr.children("td.rest").children("input").val();
 	if (!(date != "" && from != "" && to != "")) {
 		return;
 	}
-	tr.children("td.time").children("input").val(calcTimeSub(date, from, to));
+	var time = calcTimeSub(date, from, to);
+	if (rest != "") {
+		time = time - rest;
+	}
+	tr.children("td.time").children("input").val(time);
 }
 
 WorkTime.prototype.getFromTo = function() {
