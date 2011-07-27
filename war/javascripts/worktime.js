@@ -58,7 +58,7 @@ WorkTime.prototype.search = function() {
                 // 休憩時間
                 var rest_input = input("text", "rest");
                 var rest = 0;
-                if (v.version >= 2 && v.rest != undefined) {
+                if (v.rest != undefined) {
                 	rest = v.rest;
                 }
             	rest_input.attr("value", rest);
@@ -69,7 +69,7 @@ WorkTime.prototype.search = function() {
                 if (v.from != undefined && v.to != undefined) {
                 	time = calcDateSub(new Date(v.from), new Date(v.to));
                 }
-                if (v.version >= 2 && v.rest != undefined) {
+                if (v.rest != undefined) {
                 	time = time - v.rest;
                 }
             	time_input.attr("value", time);
