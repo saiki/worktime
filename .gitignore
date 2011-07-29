@@ -1,7 +1,9 @@
 .classpath
-.externalToolBuilders
+.externalToolBuilders/
 .factorypath
-.metadata
+.metadata/
 .project
-.settings
-build
+.settings/
+build/
+
+
