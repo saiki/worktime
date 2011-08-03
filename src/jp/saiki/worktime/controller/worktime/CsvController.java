@@ -34,9 +34,10 @@ public class CsvController extends Controller {
             return forward("error.jsp");
         }
         // データ取得
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-        Date from = sdf.parse(asString("from"));
-        Date to = sdf.parse(asString("to"));
+        SimpleDateFormat standardFormatter = new SimpleDateFormat("yyyy/MM/dd");
+        SimpleDateFormat fromToFormatter = new SimpleDateFormat("yyyy/MM/dd hh:mm");
+        Date from = standardFormatter.parse(asString("from"));
+        Date to = standardFormatter.parse(asString("to"));
         List<WorkTime> list = service.search(from, to);
         PrintWriter out = response.getWriter();
         out.println("\"日付\",\"開始\",\"終了\",\"休憩\",\"コード\",\"内容\",\"備考\"");
@@ -47,9 +48,9 @@ public class CsvController extends Controller {
             if (wt.getKey() != null) {
                 in.put("key", KeyFactory.keyToString(wt.getKey()));
             }
-            out.print("\"" + sdf.format(wt.getDate()) + "\",");
-            out.print("\"" + sdf.format(wt.getFrom()) + "\",");
-            out.print("\"" + sdf.format(wt.getTo()) + "\",");
+            out.print("\"" + standardFormatter.format(wt.getDate()) + "\",");
+            out.print("\"" + fromToFormatter.format(wt.getFrom()) + "\",");
+            out.print("\"" + fromToFormatter.format(wt.getTo()) + "\",");
             out.print("\"" + wt.getRest() + "\",");
             out.print("\"" + wt.getCode() + "\",");
             out.print("\"" + wt.getWork() + "\",");
