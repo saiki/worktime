@@ -1,6 +1,6 @@
 package jp.saiki.worktime.meta;
 
-//@javax.annotation.Generated(value = { "slim3-gen", "@VERSION@" }, date = "2011-07-26 21:46:56")
+//@javax.annotation.Generated(value = { "slim3-gen", "@VERSION@" }, date = "2011-08-03 21:39:36")
 /** */
 public final class WorkTimeMeta extends org.slim3.datastore.ModelMeta<jp.saiki.worktime.model.WorkTime> {
 

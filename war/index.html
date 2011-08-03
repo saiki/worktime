@@ -3,9 +3,9 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <link rel="stylesheet" href="/stylesheets/theme/jquery-ui-1.8.7.css" type="text/css"/>
-  <link rel="stylesheet" href="/stylesheets/worktime.css" type="text/css">
-  <link rel="stylesheet" href="/stylesheets/menu.css" type="text/css">
-  <link rel="stylesheet" href="/stylesheets/common.css" type="text/css">
+  <link rel="stylesheet" href="/stylesheets/worktime.css" type="text/css" />
+  <link rel="stylesheet" href="/stylesheets/menu.css" type="text/css" />
+  <link rel="stylesheet" href="/stylesheets/common.css" type="text/css" />
   <script type="text/javascript" src="/javascripts/jquery-1.4.4.min.js"></script>
   <script type="text/javascript" src="/javascripts/jquery-ui-1.8.7.custom.min.js"></script>
   <script type="text/javascript" src="/javascripts/jquery-ui-i18n.js"></script>
@@ -28,8 +28,9 @@
 <div id="contents">
 	<div class="ui-widget ui-corner-all search">
 		<form>
-			<input type="text" class="date_chooser" name="from">-<input type="text" class="date_chooser" name="to">
-			<input type="button" value="検索" id="search_button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+			<input type="text" class="date_chooser" name="from" />-<input type="text" class="date_chooser" name="to" />
+			<input type="button" value="検索" id="search_button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" />
+	        <input type="button" value="CSV出力" id="csv_button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" />
 		</form>
 	</div>
 	<br/>
@@ -61,6 +62,11 @@ $(function() {
     worktime.init();
     
     $(".date_chooser").datepicker();
+    $("#csv_button").click(function(){
+        from = $(".search input[name=from]").val(),
+        to = $(".search input[name=to]").val(),
+        window.location = "/worktime/csv?from="+from+"&to="+to;
+    });
 });
   </script>
 </body>

@@ -141,9 +141,13 @@ $(function() {
     $(".list table tr.detail").click(function() {
         $(this).addClass("active");
     });
-    
     $(".list table tr.detail").blur(function() {
         $(this).removeClass("active");
+    });
+    $("#csv_button").click(function(){
+        from = $(".search input[name=from]").val(),
+        to = $(".search input[name=to]").val(),
+        $.get("/worktime/csv/?from="+from+"&to="to);
     });
     $("#search_button").click();
 });
@@ -171,8 +175,9 @@ $(function() {
 <div id="contents">
 <div class="ui-widget ui-corner-all search">
     <form>
-        <input type="text" class="date_chooser" ${f:text("from")}>-<input type="text" class="date_chooser" ${f:text("to")}>
-        <input type="button" value="検索" id="search_button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+        <input type="text" class="date_chooser" ${f:text("from")} />-<input type="text" class="date_chooser" ${f:text("to")} />
+        <input type="button" value="検索" id="search_button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" />
+        <input type="button" value="CSV出力" id="csv_button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" />
     </form>
 </div>
 <br/>
