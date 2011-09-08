@@ -12,6 +12,7 @@ import org.slim3.util.BeanUtil;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.Transaction;
+import com.google.appengine.api.users.User;
 
 import jp.saiki.worktime.meta.WorkTimeMeta;
 import jp.saiki.worktime.model.WorkTime;
@@ -71,12 +72,13 @@ public class WorkTimeService {
      * @param to
      * @return
      */
-    public List<WorkTime> search(Date from, Date to) {
+    public List<WorkTime> search(Date from, Date to, User user) {
         List<WorkTime> ret = null;
         
         ret = Datastore.query(meta)
             .filter(meta.date.greaterThanOrEqual(from))
             .filter(meta.date.lessThanOrEqual(to))
+            .filter(meta.user.equal(user))
             .sort(meta.date.asc)
             .sort(meta.from.asc)
             .asList();

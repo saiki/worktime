@@ -15,6 +15,8 @@ import org.slim3.controller.validator.Validators;
 import org.slim3.util.BeanUtil;
 
 import com.google.appengine.api.datastore.KeyFactory;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 
 public class CsvController extends Controller {
 
@@ -38,7 +40,8 @@ public class CsvController extends Controller {
         SimpleDateFormat fromToFormatter = new SimpleDateFormat("yyyy/MM/dd hh:mm");
         Date from = standardFormatter.parse(asString("from"));
         Date to = standardFormatter.parse(asString("to"));
-        List<WorkTime> list = service.search(from, to);
+        UserService userService = UserServiceFactory.getUserService();
+        List<WorkTime> list = service.search(from, to, userService.getCurrentUser());
         PrintWriter out = response.getWriter();
         out.println("\"日付\",\"開始\",\"終了\",\"休憩\",\"コード\",\"内容\",\"備考\"");
         // keyの値がうまくわたらないので変換

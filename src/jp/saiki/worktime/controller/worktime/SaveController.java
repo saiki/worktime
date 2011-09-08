@@ -12,6 +12,8 @@ import org.slim3.util.BeanUtil;
 import org.slim3.util.RequestMap;
 
 import com.google.appengine.api.datastore.KeyFactory;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 
 public class SaveController extends Controller {
 
@@ -19,6 +21,9 @@ public class SaveController extends Controller {
     
     @Override
     public Navigation run() throws Exception {
+        UserService userService = UserServiceFactory.getUserService();
+        RequestMap m = new RequestMap(request);
+        m.put("user", userService.getCurrentUser());
         WorkTime wt = service.save(new RequestMap(request));
         Map<String, Object> json = new HashMap<String, Object>();
         BeanUtil.copy(wt, json);

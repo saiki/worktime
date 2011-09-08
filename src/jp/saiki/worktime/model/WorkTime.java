@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 import com.google.appengine.api.datastore.Key;
+import com.google.appengine.api.users.User;
 
 import org.slim3.datastore.Attribute;
 import org.slim3.datastore.Model;
@@ -39,6 +40,9 @@ public class WorkTime implements Serializable {
     
     @Attribute
     private String remark;
+    
+    @Attribute
+    private User user;
     
     /**
      * Returns the key.
@@ -166,5 +170,13 @@ public class WorkTime implements Serializable {
 
     public void setRest(Double rest) {
         this.rest = rest;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

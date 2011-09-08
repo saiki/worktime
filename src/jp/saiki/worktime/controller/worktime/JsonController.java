@@ -17,6 +17,8 @@ import org.slim3.datastore.Datastore;
 import org.slim3.util.BeanUtil;
 
 import com.google.appengine.api.datastore.KeyFactory;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 
 public class JsonController extends Controller {
     
@@ -44,7 +46,8 @@ public class JsonController extends Controller {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
             Date from = sdf.parse(requestScope("from").toString());
             Date to = sdf.parse(requestScope("to").toString());
-            List<WorkTime> list = service.search(from, to);
+            UserService userService = UserServiceFactory.getUserService();
+            List<WorkTime> list = service.search(from, to, userService.getCurrentUser());
             // 新規登録ようにからのデータを追加
             list.add(new WorkTime());
 
